@@ -1,0 +1,741 @@
+log started: Wed Dec  9 17:18:30 2020
+
+Log file: ./leap.log
+>> # ----- NOTE: this is designed for PDB format 3!
+>> #	Uses ff99bsc0+bsc1 for DNA
+>> #               (ff99): Wang et al. J. Comp. Chem. 21: 1049, 2000
+>> #               (bsc0): Perez et al. Biophys J. 92: 3817, 2007
+>> #               (bsc1): Ivani et al. Nature Methods 13: 55, 2016
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "HZ"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OP"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CX"  "C" "sp3" }
+>> 	{ "C8"  "C" "sp3" }
+>> 	{ "2C"  "C" "sp3" }
+>> 	{ "3C"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "CS"  "C" "sp2" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "CO"  "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "C5"  "C" "sp2" }
+>> 	{ "C4"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp3" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "Ca" "sp3" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "NY"  "N" "sp2" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "EP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "Cl"  "Cl" "sp3" }
+>> 	{ "Br"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>> }
+>> 
+>> #
+>> #	Load the main parameter set.
+>> #
+>> 
+>> parm10 = loadamberparams parm10.dat
+Loading parameters: /usr/local/amber/amber16/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+(UNKNOWN ATOM TYPE: Zn)
+(UNKNOWN ATOM TYPE: EP)
+>> 
+>> #
+>> #	Load nucleic acids
+>> #
+>> 
+>> addPdbResMap {
+>>   { 0 "DG" "DG5"  } { 1 "DG" "DG3"  }  
+>>   { 0 "DA" "DA5"  } { 1 "DA" "DA3"  }  
+>>   { 0 "DC" "DC5"  } { 1 "DC" "DC3"  }  
+>>   { 0 "DT" "DT5"  } { 1 "DT" "DT3"  }  
+>> #  some really old Amber residue names, assuming DNA:
+>>   { 0 "GUA" "DG5"  } { 1 "GUA" "DG3"  } { "GUA" "DG" }
+>>   { 0 "ADE" "DA5"  } { 1 "ADE" "DA3"  } { "ADE" "DA" }
+>>   { 0 "CYT" "DC5"  } { 1 "CYT" "DC3"  } { "CYT" "DC" }
+>>   { 0 "THY" "DT5"  } { 1 "THY" "DT3"  } { "THY" "DT" }
+>> 
+>> }
+>> 
+>> #  try to be good about reading in really old atom names as well:
+>> addPdbAtomMap {
+>>   { "O5*" "O5'" }
+>>   { "C5*" "C5'" }
+>>   { "C4*" "C4'" }
+>>   { "O4*" "O4'" }
+>>   { "C3*" "C3'" }
+>>   { "O3*" "O3'" }
+>>   { "C2*" "C2'" }
+>>   { "O2*" "O2'" }
+>>   { "C1*" "C1'" }
+>>   { "C5M" "C7"  }
+>>   { "H1*" "H1'" }
+>>   { "H2*1" "H2'" }
+>>   { "'H2'" "H2''" }
+>>   { "H2*2" "H2''" }
+>>   { "H2'1" "H2'" }
+>>   { "H2'2" "H2''" }
+>>   { "H3*" "H3'" }
+>>   { "H4*" "H4'" }
+>>   { "H5*1" "H5'" }
+>>   { "H5*2" "H5''" }
+>>   { "H5'1" "H5'" }
+>>   { "H5'2" "H5''" }
+>>   { "'H5'" "H5''" }
+>>   { "HO'2" "HO2'" }
+>>   { "H5T"  "HO5'" }
+>>   { "H3T"  "HO3'" }
+>>   { "O1'" "O4'" }
+>>   { "OA"  "OP1" }
+>>   { "OB"  "OP2" }
+>>   { "O1P" "OP1" }
+>>   { "O2P" "OP2" }
+>> }
+>> 
+>> #
+>> # Load parameters for BSC1
+>> #
+>> addAtomTypes {
+>>   { "C1" "C" "sp2" }
+>>   { "C2" "C" "sp2" }
+>>   { "CI" "C" "sp3" }
+>>   { "CE" "C" "sp3" }
+>>  }
+>> 
+>> loadoff parmBSC1.lib
+Loading library: /usr/local/amber/amber16/dat/leap/lib/parmBSC1.lib
+Loading: DA
+Loading: DA3
+Loading: DA5
+Loading: DAN
+Loading: DC
+Loading: DC3
+Loading: DC5
+Loading: DCN
+Loading: DG
+Loading: DG3
+Loading: DG5
+Loading: DGN
+Loading: DT
+Loading: DT3
+Loading: DT5
+Loading: DTN
+>> loadamberparams frcmod.parmbsc1
+Loading parameters: /usr/local/amber/amber16/dat/leap/parm/frcmod.parmbsc1
+Reading force field modification type file (frcmod)
+Reading title:
+Parmbsc1 force-field for DNA
+> 
+> source leaprc.gaff2 #load gaff2 FF
+----- Source: /usr/local/amber/amber16/dat/leap/cmd/leaprc.gaff2
+----- Source of /usr/local/amber/amber16/dat/leap/cmd/leaprc.gaff2 done
+>> logFile leap.log
+log started: Wed Dec  9 17:18:30 2020
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the general Amber Force field.
+>> #       This file is mostly for use with Antechamber
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "h1"  "H" "sp3" }
+>> 	{ "h2"  "H" "sp3" }
+>> 	{ "h3"  "H" "sp3" }
+>> 	{ "h4"  "H" "sp3" }
+>> 	{ "h5"  "H" "sp3" }
+>> 	{ "ha"  "H" "sp3" }
+>> 	{ "hc"  "H" "sp3" }
+>> 	{ "hn"  "H" "sp3" }
+>> 	{ "ho"  "H" "sp3" }
+>> 	{ "hp"  "H" "sp3" }
+>> 	{ "hs"  "H" "sp3" }
+>> 	{ "hw"  "H" "sp3" }
+>> 	{ "hx"  "H" "sp3" }
+>> 	{ "o"  "O" "sp2" }
+>> 	{ "o2"  "O" "sp2" }
+>> 	{ "oh"  "O" "sp3" }
+>> 	{ "os"  "O" "sp3" }
+>> 	{ "ow"  "O" "sp3" }
+>> 	{ "c"  "C" "sp2" }
+>> 	{ "c1"  "C" "sp2" }
+>> 	{ "c2"  "C" "sp2" }
+>> 	{ "c3"  "C" "sp3" }
+>> 	{ "ca"  "C" "sp2" }
+>> 	{ "cc"  "C" "sp2" }
+>> 	{ "cd"  "C" "sp2" }
+>> 	{ "ce"  "C" "sp2" }
+>> 	{ "cf"  "C" "sp2" }
+>> 	{ "cg"  "C" "sp2" }
+>> 	{ "ch"  "C" "sp2" }
+>> 	{ "cp"  "C" "sp2" }
+>> 	{ "cq"  "C" "sp2" }
+>> 	{ "cu"  "C" "sp2" }
+>> 	{ "cv"  "C" "sp2" }
+>> 	{ "cx"  "C" "sp2" }
+>> 	{ "cy"  "C" "sp2" }
+>> 	{ "cz"  "C" "sp2" }
+>> 	{ "n"   "N" "sp2" }
+>> 	{ "n1"  "N" "sp2" }
+>> 	{ "n2"  "N" "sp2" }
+>> 	{ "n3"  "N" "sp3" }
+>> 	{ "n4"  "N" "sp3" }
+>> 	{ "na"  "N" "sp2" }
+>> 	{ "nb"  "N" "sp2" }
+>> 	{ "nc"  "N" "sp2" }
+>> 	{ "nd"  "N" "sp2" }
+>> 	{ "ne"  "N" "sp2" }
+>> 	{ "nf"  "N" "sp2" }
+>> 	{ "nh"  "N" "sp2" }
+>> 	{ "no"  "N" "sp2" }
+>> 	{ "s"   "S" "sp2" }
+>> 	{ "s2"   "S" "sp2" }
+>> 	{ "s3"   "S" "sp3" }
+>> 	{ "s4"   "S" "sp3" }
+>> 	{ "s6"   "S" "sp3" }
+>> 	{ "sh"   "S" "sp3" }
+>> 	{ "ss"   "S" "sp3" }
+>> 	{ "sx"   "S" "sp3" }
+>> 	{ "sy"   "S" "sp3" }
+>> 	{ "p2"   "P" "sp2" }
+>> 	{ "p3"   "P" "sp3" }
+>> 	{ "p4"   "P" "sp3" }
+>> 	{ "p5"   "P" "sp3" }
+>> 	{ "pb"   "P" "sp3" }
+>> 	{ "pc"   "P" "sp3" }
+>> 	{ "pd"   "P" "sp3" }
+>> 	{ "pe"   "P" "sp3" }
+>> 	{ "pf"   "P" "sp3" }
+>> 	{ "px"   "P" "sp3" }
+>> 	{ "py"   "P" "sp3" }
+>> 	{ "f"   "F" "sp3" }
+>> 	{ "cl"  "Cl" "sp3" }
+>> 	{ "br"  "Br" "sp3" }
+>> 	{ "i"   "I"  "sp3" }
+>> }
+>> #
+>> #	Load the general force field parameter set.
+>> #
+>> gaff = loadamberparams gaff2.dat
+Loading parameters: /usr/local/amber/amber16/dat/leap/parm/gaff2.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 2.1, April 2016)
+(UNKNOWN ATOM TYPE: n+)
+(UNKNOWN ATOM TYPE: n9)
+(UNKNOWN ATOM TYPE: n7)
+(UNKNOWN ATOM TYPE: n8)
+(UNKNOWN ATOM TYPE: nx)
+(UNKNOWN ATOM TYPE: nz)
+(UNKNOWN ATOM TYPE: ns)
+(UNKNOWN ATOM TYPE: nu)
+(UNKNOWN ATOM TYPE: nv)
+> 
+> # Load parameters for each element/residue
+> loadamberparams frcmod.COPPERnew.dat
+Loading parameters: ./frcmod.COPPERnew.dat
+Reading force field modification type file (frcmod)
+Reading title:
+Copper parameters update (DFT calculation 14/01/19)
+> loadamberparams frcmod.NITROXIDESnew.dat
+Loading parameters: ./frcmod.NITROXIDESnew.dat
+Reading force field modification type file (frcmod)
+Reading title:
+Nitroxides parameters update of ff99SB (2009) - update 09/04/2020 SK
+(UNKNOWN ATOM TYPE: NN)
+(UNKNOWN ATOM TYPE: ON)
+(UNKNOWN ATOM TYPE: LP)
+> loadamberparams frcmod.gaff2_addparamSi.dat
+Loading parameters: ./frcmod.gaff2_addparamSi.dat
+Reading force field modification type file (frcmod)
+Reading title:
+DOCK Amber Score Tetrahedrally Bonded Silicon 
+(UNKNOWN ATOM TYPE: Si)
+> loadamberprep X_Z_M.prepi
+Loading Prep file: ./X_Z_M.prepi
+(UNKNOWN ATOM TYPE: Si)
+Loaded UNIT: XZM
+> loadamberprep X_Z_I.prepi
+Loading Prep file: ./X_Z_I.prepi
+(UNKNOWN ATOM TYPE: Si)
+Loaded UNIT: XZI
+> loadamberprep rZ_M_N.prepi
+Loading Prep file: ./rZ_M_N.prepi
+(UNKNOWN ATOM TYPE: NN)
+(UNKNOWN ATOM TYPE: ON)
+(UNKNOWN ATOM TYPE: LP)
+(UNKNOWN ATOM TYPE: LP)
+Loaded UNIT: rZMN
+> loadamberprep rN_M_N.prepi
+Loading Prep file: ./rN_M_N.prepi
+(UNKNOWN ATOM TYPE: NN)
+(UNKNOWN ATOM TYPE: ON)
+(UNKNOWN ATOM TYPE: LP)
+(UNKNOWN ATOM TYPE: LP)
+Loaded UNIT: rNMN
+> loadamberprep M_N_P.prepi
+Loading Prep file: ./M_N_P.prepi
+Loaded UNIT: MNP
+> loadamberprep P_N_I.prepi
+Loading Prep file: ./P_N_I.prepi
+Loaded UNIT: PNI
+> loadamberprep I_N_M.prepi
+Loading Prep file: ./I_N_M.prepi
+Loaded UNIT: INM
+> loadamberprep M_N_I.prepi
+Loading Prep file: ./M_N_I.prepi
+Loaded UNIT: MNI
+> loadamberprep I_N_P.prepi
+Loading Prep file: ./I_N_P.prepi
+Loaded UNIT: INP
+> loadamberprep rN_P_N.prepi
+Loading Prep file: ./rN_P_N.prepi
+Loaded UNIT: rNPN
+> loadamberprep rN_Pp_B.prepi
+Loading Prep file: ./rN_Pp_B.prepi
+Loaded UNIT: rNPpB
+> loadamberprep rN_I_B.prepi
+Loading Prep file: ./rN_I_B.prepi
+Loaded UNIT: rNIpB
+> loadamberprep rZ_I_N.prepi
+Loading Prep file: ./rZ_I_N.prepi
+Loaded UNIT: rZIN
+> loadamberprep rN_I_N.prepi
+Loading Prep file: ./rN_I_N.prepi
+Loaded UNIT: rNIN
+> loadamberprep I_B_X.prepi
+Loading Prep file: ./I_B_X.prepi
+Loaded UNIT: IBX
+> loadamberprep P_B_X.prepi
+Loading Prep file: ./P_B_X.prepi
+Loaded UNIT: PBX
+> # Create sequence-defined oligomers with different chain size
+> pMPI= sequence {XZM rZMN MNP rNPN PNI rNIpB IBX}
+Sequence: XZM
+Sequence: rZMN
+Joining XZM - rZMN
+Sequence: MNP
+Joining rZMN - MNP
+Sequence: rNPN
+Joining MNP - rNPN
+Sequence: PNI
+Joining rNPN - PNI
+Sequence: rNIpB
+Joining PNI - rNIpB
+Sequence: IBX
+Joining rNIpB - IBX
+> pIMP= sequence {XZI rZIN INM rNMN MNP rNPpB PBX}
+Sequence: XZI
+Sequence: rZIN
+Joining XZI - rZIN
+Sequence: INM
+Joining rZIN - INM
+Sequence: rNMN
+Joining INM - rNMN
+Sequence: MNP
+Joining rNMN - MNP
+Sequence: rNPpB
+Joining MNP - rNPpB
+Sequence: PBX
+Joining rNPpB - PBX
+> pMIP= sequence {XZM rZMN MNI rNIN INP rNPpB PBX}
+Sequence: XZM
+Sequence: rZMN
+Joining XZM - rZMN
+Sequence: MNI
+Joining rZMN - MNI
+Sequence: rNIN
+Joining MNI - rNIN
+Sequence: INP
+Joining rNIN - INP
+Sequence: rNPpB
+Joining INP - rNPpB
+Sequence: PBX
+Joining rNPpB - PBX
+> # Save as prmtop and crd
+> saveAmberParm pMPI pMPI.prmtop pMPI.crd
+Checking Unit.
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rZMN 2>.A<O 27> and .R<rZMN 2>.A<LP 28>
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rZMN 2>.A<O 27> and .R<rZMN 2>.A<LP 29>
+
+ -- ignoring the warnings.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ ** Warning: No sp2 improper torsion term for  cc-h4-cd-na
+        atoms are: C1 H16 C5 N10
+ ** Warning: No sp2 improper torsion term for  nc-cd-cc-c3
+        atoms are: N2 C5 C1 C32
+ ** Warning: No sp2 improper torsion term for  c3-nd-na-cd
+        atoms are: C6 N3 N10 C5
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  ca-Cu-nb-ca
+        atoms are: C14 CU21 N15 C10
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  nd-h5-cc-na
+        atoms are: N6 H22 C9 N3
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-h4
+        atoms are: C3 N6 C5 H21
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N3 C5 C3 H20
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-cc
+        atoms are: C19 C3 N3 C9
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-c3
+        atoms are: C4 N10 C7 C16
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N1 C7 C4 H1
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-nc
+        atoms are: C6 C4 N1 N13
+old PREP-specified impropers:
+ <rZMN 2>:  C6   C5   N10  N3  
+ <rZMN 2>:  C32  C5   C1   N2  
+ <rZMN 2>:  C1   H16  C5   N10 
+ <rZMN 2>:  N13  O12  C11  O10 
+ <rZMN 2>:  C14  C11  N13  H25 
+ <MNP 3>:  C4   C6   N5   N9  
+ <MNP 3>:  C7   H9   C6   N5  
+ <MNP 3>:  C10  C6   C7   N8  
+ <rNPN 4>:  C1   C9   N2   N6  
+ <rNPN 4>:  CU21 C8   N7   N6  
+ <rNPN 4>:  C10  C9   C8   N7  
+ <rNPN 4>:  C8   H20  C9   N2  
+ <rNPN 4>:  C11  C8   C10  N15 
+ <rNPN 4>:  C10  C12  C11  H16 
+ <rNPN 4>:  C11  C13  C12  H17 
+ <rNPN 4>:  C12  C14  C13  H18 
+ <rNPN 4>:  C13  H19  C14  N15 
+ <rNPN 4>:  C10  C14  N15  CU21
+ <rNPN 4>:  I22  N15  CU21 N7  
+ <rNPN 4>:  N28  O27  C26  O25 
+ <rNPN 4>:  C26  C29  N28  H12 
+ <PNI 5>:  C4   C6   N5   N9  
+ <PNI 5>:  C7   H9   C6   N5  
+ <PNI 5>:  C10  C6   C7   N8  
+ <rNIpB 6>:  C6   C4   N1   N13 
+ <rNIpB 6>:  C7   H1   C4   N1  
+ <rNIpB 6>:  C16  C4   C7   N10 
+ <rNIpB 6>:  C19  C3   N3   C9  
+ <rNIpB 6>:  C5   H20  C3   N3  
+ <rNIpB 6>:  C3   H21  C5   N6  
+ <rNIpB 6>:  H22  N3   C9   N6  
+ <rNIpB 6>:  N2   O12  C11  O10 
+ <rNIpB 6>:  +M   C11  N2   H8  
+ <IBX 7>:  C13  C1   C3   C5  
+ <IBX 7>:  C3   C7   C5   H2  
+ <IBX 7>:  C5   C9   C7   H3  
+ <IBX 7>:  C11  C7   C9   H4  
+ <IBX 7>:  C1   C9   C11  H5  
+ <IBX 7>:  C11  C3   C1   H1  
+ total 22 improper torsions applied
+ 39 improper torsions in old prep form
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+ (no restraints)
+> saveAmberParm pIMP pIMP.prmtop pIMP.crd
+Checking Unit.
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rNMN 4>.A<O 27> and .R<rNMN 4>.A<LP 28>
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rNMN 4>.A<O 27> and .R<rNMN 4>.A<LP 29>
+
+ -- ignoring the warnings.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ ** Warning: No sp2 improper torsion term for  nd-h5-cc-na
+        atoms are: N6 H22 C9 N3
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-h4
+        atoms are: C3 N6 C5 H21
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N3 C5 C3 H20
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-cc
+        atoms are: C19 C3 N3 C9
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-c3
+        atoms are: C4 N10 C7 C16
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N1 C7 C4 H1
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-nc
+        atoms are: C6 C4 N1 N13
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  cc-h4-cd-na
+        atoms are: C1 H16 C5 N10
+ ** Warning: No sp2 improper torsion term for  nc-cd-cc-c3
+        atoms are: N2 C5 C1 C32
+ ** Warning: No sp2 improper torsion term for  c3-nd-na-cd
+        atoms are: C6 N3 N10 C5
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  ca-Cu-nb-ca
+        atoms are: C14 CU21 N15 C10
+old PREP-specified impropers:
+ <rZIN 2>:  C6   C4   N1   N13 
+ <rZIN 2>:  C7   H1   C4   N1  
+ <rZIN 2>:  C16  C4   C7   N10 
+ <rZIN 2>:  C19  C3   N3   C9  
+ <rZIN 2>:  C5   H20  C3   N3  
+ <rZIN 2>:  C3   H21  C5   N6  
+ <rZIN 2>:  H22  N3   C9   N6  
+ <rZIN 2>:  N2   O12  C11  O10 
+ <rZIN 2>:  C11  C14  N2   H8  
+ <INM 3>:  C4   C6   N5   N9  
+ <INM 3>:  C7   H9   C6   N5  
+ <INM 3>:  C10  C6   C7   N8  
+ <rNMN 4>:  C6   C5   N10  N3  
+ <rNMN 4>:  C32  C5   C1   N2  
+ <rNMN 4>:  C1   H16  C5   N10 
+ <rNMN 4>:  N13  O12  C11  O10 
+ <rNMN 4>:  C14  C11  N13  H25 
+ <MNP 5>:  C4   C6   N5   N9  
+ <MNP 5>:  C7   H9   C6   N5  
+ <MNP 5>:  C10  C6   C7   N8  
+ <rNPpB 6>:  C1   C9   N2   N6  
+ <rNPpB 6>:  CU21 C8   N7   N6  
+ <rNPpB 6>:  C10  C9   C8   N7  
+ <rNPpB 6>:  C8   H20  C9   N2  
+ <rNPpB 6>:  C11  C8   C10  N15 
+ <rNPpB 6>:  C10  C12  C11  H16 
+ <rNPpB 6>:  C11  C13  C12  H17 
+ <rNPpB 6>:  C12  C14  C13  H18 
+ <rNPpB 6>:  C13  H19  C14  N15 
+ <rNPpB 6>:  C10  C14  N15  CU21
+ <rNPpB 6>:  I22  N15  CU21 N7  
+ <rNPpB 6>:  N28  O27  C26  O25 
+ <rNPpB 6>:  +M   C26  N28  H12 
+ <PBX 7>:  C13  C1   C3   C5  
+ <PBX 7>:  C3   C7   C5   H2  
+ <PBX 7>:  C5   C9   C7   H3  
+ <PBX 7>:  C11  C7   C9   H4  
+ <PBX 7>:  C1   C9   C11  H5  
+ <PBX 7>:  C11  C3   C1   H1  
+ total 22 improper torsions applied
+ 39 improper torsions in old prep form
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+ (no restraints)
+> saveAmberParm pMIP pMIP.prmtop pMIP.crd
+Checking Unit.
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rZMN 2>.A<O 27> and .R<rZMN 2>.A<LP 28>
+WARNING: There is a bond of 0.450000 angstroms between: 
+-------  .R<rZMN 2>.A<O 27> and .R<rZMN 2>.A<LP 29>
+
+ -- ignoring the warnings.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ ** Warning: No sp2 improper torsion term for  cc-h4-cd-na
+        atoms are: C1 H16 C5 N10
+ ** Warning: No sp2 improper torsion term for  nc-cd-cc-c3
+        atoms are: N2 C5 C1 C32
+ ** Warning: No sp2 improper torsion term for  c3-nd-na-cd
+        atoms are: C6 N3 N10 C5
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  nd-h5-cc-na
+        atoms are: N6 H22 C9 N3
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-h4
+        atoms are: C3 N6 C5 H21
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N3 C5 C3 H20
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-cc
+        atoms are: C19 C3 N3 C9
+ ** Warning: No sp2 improper torsion term for  cc-nd-cd-c3
+        atoms are: C4 N10 C7 C16
+ ** Warning: No sp2 improper torsion term for  na-cd-cc-h4
+        atoms are: N1 C7 C4 H1
+ ** Warning: No sp2 improper torsion term for  c3-cc-na-nc
+        atoms are: C6 C4 N1 N13
+ ** Warning: No sp2 improper torsion term for  cc-c3-cd-nd
+        atoms are: C6 C10 C7 N8
+ ** Warning: No sp2 improper torsion term for  na-h4-cc-cd
+        atoms are: N5 H9 C6 C7
+ ** Warning: No sp2 improper torsion term for  c3-nc-na-cc
+        atoms are: C4 N9 N5 C6
+ ** Warning: No sp2 improper torsion term for  ca-Cu-nb-ca
+        atoms are: C14 CU21 N15 C10
+old PREP-specified impropers:
+ <rZMN 2>:  C6   C5   N10  N3  
+ <rZMN 2>:  C32  C5   C1   N2  
+ <rZMN 2>:  C1   H16  C5   N10 
+ <rZMN 2>:  N13  O12  C11  O10 
+ <rZMN 2>:  C14  C11  N13  H25 
+ <MNI 3>:  C4   C6   N5   N9  
+ <MNI 3>:  C7   H9   C6   N5  
+ <MNI 3>:  C10  C6   C7   N8  
+ <rNIN 4>:  C6   C4   N1   N13 
+ <rNIN 4>:  C7   H1   C4   N1  
+ <rNIN 4>:  C16  C4   C7   N10 
+ <rNIN 4>:  C19  C3   N3   C9  
+ <rNIN 4>:  C5   H20  C3   N3  
+ <rNIN 4>:  C3   H21  C5   N6  
+ <rNIN 4>:  H22  N3   C9   N6  
+ <rNIN 4>:  N2   O12  C11  O10 
+ <rNIN 4>:  C11  C14  N2   H8  
+ <INP 5>:  C4   C6   N5   N9  
+ <INP 5>:  C7   H9   C6   N5  
+ <INP 5>:  C10  C6   C7   N8  
+ <rNPpB 6>:  C1   C9   N2   N6  
+ <rNPpB 6>:  CU21 C8   N7   N6  
+ <rNPpB 6>:  C10  C9   C8   N7  
+ <rNPpB 6>:  C8   H20  C9   N2  
+ <rNPpB 6>:  C11  C8   C10  N15 
+ <rNPpB 6>:  C10  C12  C11  H16 
+ <rNPpB 6>:  C11  C13  C12  H17 
+ <rNPpB 6>:  C12  C14  C13  H18 
+ <rNPpB 6>:  C13  H19  C14  N15 
+ <rNPpB 6>:  C10  C14  N15  CU21
+ <rNPpB 6>:  I22  N15  CU21 N7  
+ <rNPpB 6>:  N28  O27  C26  O25 
+ <rNPpB 6>:  +M   C26  N28  H12 
+ <PBX 7>:  C13  C1   C3   C5  
+ <PBX 7>:  C3   C7   C5   H2  
+ <PBX 7>:  C5   C9   C7   H3  
+ <PBX 7>:  C11  C7   C9   H4  
+ <PBX 7>:  C1   C9   C11  H5  
+ <PBX 7>:  C11  C3   C1   H1  
+ total 22 improper torsions applied
+ 39 improper torsions in old prep form
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+ (no restraints)
+> # Save as pdb files (to visualize them in VMD or pymol)
+> savepdb pMPI pMPI.pdb
+Writing pdb file: pMPI.pdb
+ Truncating residue name for PDB format: rZMN -> rZM
+ Truncating residue name for PDB format: rNPN -> rNP
+ Truncating residue name for PDB format: rNIpB -> rNI
+> savepdb pIMP pIMP.pdb
+Writing pdb file: pIMP.pdb
+ Truncating residue name for PDB format: rZIN -> rZI
+ Truncating residue name for PDB format: rNMN -> rNM
+ Truncating residue name for PDB format: rNPpB -> rNP
+> savepdb pMIP pMIP.pdb
+Writing pdb file: pMIP.pdb
+ Truncating residue name for PDB format: rZMN -> rZM
+ Truncating residue name for PDB format: rNIN -> rNI
+ Truncating residue name for PDB format: rNPpB -> rNP
+> # Save as mol2 files
+> savemol2 pMPI pMPI.mol2 0
+Writing mol2 file: pMPI.mol2
+ Truncating residue name for PDB format: rNIpB -> rNIp
+ Truncating residue name for PDB format: rZMN -> rZM
+ Truncating residue name for PDB format: rNPN -> rNP
+ Truncating residue name for PDB format: rNIpB -> rNI
+> savemol2 pIMP pIMP.mol2 0
+Writing mol2 file: pIMP.mol2
+ Truncating residue name for PDB format: rNPpB -> rNPp
+ Truncating residue name for PDB format: rZIN -> rZI
+ Truncating residue name for PDB format: rNMN -> rNM
+ Truncating residue name for PDB format: rNPpB -> rNP
+> savemol2 pMIP pMIP.mol2 0
+Writing mol2 file: pMIP.mol2
+ Truncating residue name for PDB format: rNPpB -> rNPp
+ Truncating residue name for PDB format: rZMN -> rZM
+ Truncating residue name for PDB format: rNIN -> rNI
+ Truncating residue name for PDB format: rNPpB -> rNP
+> quit
+	Quit

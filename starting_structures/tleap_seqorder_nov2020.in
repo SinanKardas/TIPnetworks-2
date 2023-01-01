@@ -1,0 +1,59 @@
+####
+tleap script file to generate input files (.crd and .prmtop) for the simulation of sequence-defined oligomers
+####
+
+# Source leaprc files for bsc1 for and gaff2
+
+source leaprc.DNA.bsc1  #load bsc1 FF
+source leaprc.gaff2 #load gaff2 FF
+
+
+# Load parameters for each element/residue
+
+loadamberparams frcmod.COPPERnew.dat
+loadamberparams frcmod.NITROXIDESnew.dat
+loadamberparams frcmod.gaff2_addparamSi.dat
+loadamberprep X_Z_M.prepi
+loadamberprep X_Z_I.prepi
+loadamberprep rZ_M_N.prepi
+loadamberprep rN_M_N.prepi
+loadamberprep M_N_P.prepi
+loadamberprep P_N_I.prepi
+loadamberprep I_N_M.prepi
+loadamberprep M_N_I.prepi
+loadamberprep I_N_P.prepi
+loadamberprep rN_P_N.prepi
+loadamberprep rN_Pp_B.prepi
+loadamberprep rN_I_B.prepi
+loadamberprep rZ_I_N.prepi
+loadamberprep rN_I_N.prepi
+loadamberprep I_B_X.prepi
+loadamberprep P_B_X.prepi
+
+
+# Create sequence-defined oligomers with different chain size
+
+pMPI= sequence {XZM rZMN MNP rNPN PNI rNIpB IBX}
+pIMP= sequence {XZI rZIN INM rNMN MNP rNPpB PBX}
+pMIP= sequence {XZM rZMN MNI rNIN INP rNPpB PBX}
+
+# Save as prmtop and crd
+
+saveAmberParm pMPI pMPI.prmtop pMPI.crd
+saveAmberParm pIMP pIMP.prmtop pIMP.crd 
+saveAmberParm pMIP pMIP.prmtop pMIP.crd
+
+# Save as pdb files (to visualize them in VMD or pymol)
+
+savepdb pMPI pMPI.pdb
+savepdb pIMP pIMP.pdb
+savepdb pMIP pMIP.pdb
+
+# Save as mol2 files
+
+savemol2 pMPI pMPI.mol2 0
+savemol2 pIMP pIMP.mol2 0
+savemol2 pMIP pMIP.mol2 0
+
+quit
+
